@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const port = 3000;
 // routes
-const eventsRouter = require('./routes/events');
+const eventsRouter = require('./routers/events');
 app.use('/events', eventsRouter);
 
 // server
