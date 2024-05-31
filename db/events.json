@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "title": "Concerto in Piazza",
+        "description": "Concerto live di band locali",
+        "date": "2024-06-15",
+        "maxSeats": 100
+    },
+    {
+        "id": 2,
+        "title": "Mostra d'Arte",
+        "description": "Esposizione di opere d'arte moderne",
+        "date": "2024-07-20",
+        "maxSeats": 50
+    },
+    {
+        "id": 3,
+        "title": "Corso di Cucina",
+        "description": "Lezioni di cucina per imparare nuove ricette",
+        "date": "2024-08-10",
+        "maxSeats": 20
+    }
+]

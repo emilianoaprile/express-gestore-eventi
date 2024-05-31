@@ -4,6 +4,7 @@ const port = 3000;
 // routes
 const eventsRouter = require('./routers/events');
 app.use('/events', eventsRouter);
+app.use(express.json());
 
 // server
 app.get('/', (req, res) => {

@@ -1,13 +1,26 @@
 const path = require('path');
 const fs = require('fs');
-const event = require('../models/event');
+const eventModel = require('../models/Event.js');
+
 
 const index = (req, res) => {
-    res.send('Index controller')
+    eventModel.getEvents((error, events) => {
+        if (error) {
+            return res.status(500).json(error);
+        }
+        res.json(events);
+    })
 };
 
 const store = (req, res) => {
-    res.send('Store controller')
+    const event = req.body;
+    // chiamo il metodo statico addEvent della classe EventModel
+    eventModel.addEvent(event, (error) => {
+        if (error) {
+            return res.status(500).json(error);
+        }
+        res.status(200).json(event);
+    })
 };
 
 const update = (req, res) => {

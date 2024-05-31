@@ -3,7 +3,7 @@ const path = require("path");
 
 const filePath = path.join(__dirname, "..", "db", "events.json");
 
-class Event {
+class EventModel {
   constructor(id, title, description, date, maxSeats) {
     this.id = id;
     this.title = title;
@@ -18,7 +18,7 @@ class Event {
         return callback(error);
       } else {
         const events = JSON.parse(data);
-        return callback(events);
+        return callback(null, events);
       }
     });
   }
@@ -41,9 +41,9 @@ class Event {
 
       const event = events.find((event) => event.id === id);
       if (event) {
-        return callback(event);
+        return callback(null, event);
       } else {
-        return callback('Evento non trovato');
+        return callback(null, 'Evento non trovato');
       }
     });
   }
@@ -51,22 +51,23 @@ class Event {
   static getEvents(callback) {
     this.readJSON((error, events) => {
       if (error) {
-        return callback(error, 'Evento non trovato');
+        return callback(error);
       }
-      return callback(events);
+      return callback(null, events);
     });
   }
 
   static addEvent(event, callback) {
     this.readJSON((error, events) => {
       if (error) {
-        return callback(error, 'Evento non aggiunto');
+        return callback(error);
       }
-      event.id = events.length + 1;
-      events.push(event);
+      const newEventId = events.length + 1;
+      const newEvent = {...event, id: newEventId };
+      events.push(newEvent);
       this.saveJSON(events, callback);
     });
   }
 }
 
-module.exports = Event;
+module.exports = EventModel;
