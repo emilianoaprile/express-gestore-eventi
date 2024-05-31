@@ -1,5 +1,6 @@
 const path = require('path');
 const fs = require('fs');
+const event = require('../models/event');
 
 const index = (req, res) => {
     res.send('Index controller')
