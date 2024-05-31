@@ -43,17 +43,31 @@ class EventModel {
       if (event) {
         return callback(null, event);
       } else {
-        return callback(null, 'Evento non trovato');
+        return callback(null, "Evento non trovato");
       }
     });
   }
 
-  static getEvents(callback) {
+  static getEvents(filters, callback) {
     this.readJSON((error, events) => {
       if (error) {
         return callback(error);
       }
-      return callback(null, events);
+      let filteredEvents = events;
+      if (filters) {
+        filteredEvents = events.filter((event) => {
+          if (filters.title && event.title !== filters.title) {
+            return false;
+          }
+
+          if (filters.date && event.date !== filters.date) {
+            return false;
+          }
+
+          return true;
+        });
+      }
+      return callback(null, filteredEvents);
     });
   }
 
@@ -63,7 +77,7 @@ class EventModel {
         return callback(error);
       }
       const newEventId = events.length + 1;
-      const newEvent = {...event, id: newEventId };
+      const newEvent = { ...event, id: newEventId };
       events.push(newEvent);
       this.saveJSON(events, callback);
     });

@@ -4,7 +4,8 @@ const eventModel = require('../models/Event.js');
 
 
 const index = (req, res) => {
-    eventModel.getEvents((error, events) => {
+    const filters = req.query;
+    eventModel.getEvents(filters, (error, events) => {
         if (error) {
             return res.status(500).json(error);
         }
