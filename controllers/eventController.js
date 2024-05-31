@@ -24,6 +24,16 @@ const store = (req, res) => {
     })
 };
 
+const getById = (req, res) => {
+    const id = req.params.id;
+    eventModel.getEventById(id, (error, event) => {
+        if (error) {
+            return res.status(500).json(error);
+        }
+        res.json(event);
+    })
+}
+
 const update = (req, res) => {
     res.send('Update controller')
 };
@@ -31,5 +41,6 @@ const update = (req, res) => {
 module.exports = {
     index,
     store,
-    update
+    update,
+    getById
 }

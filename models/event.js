@@ -38,8 +38,8 @@ class EventModel {
       if (error) {
         return callback(error);
       }
-
-      const event = events.find((event) => event.id === id);
+      const eventId = parseInt(id);
+      const event = events.find((event) => event.id === eventId);
       if (event) {
         return callback(null, event);
       } else {
